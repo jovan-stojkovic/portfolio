@@ -4,32 +4,45 @@ const App = () => {
   const [websiteHide, setWebsiteHide] = useState("hide");
   const [challengeHide, setChallengeHide] = useState("hide");
   const [theme, setTheme] = useState("light");
+  const [language, setLanguage] = useState("english");
 
   return (
     <main className={theme}>
       <div className="container">
-        <div className="top-border"></div>
-        <div className="left-border"></div>
-        <div className="right-border"></div>
-        <div className="bottom-border"></div>
-        <button
-          className="theme"
-          onClick={() => {
-            setTheme(theme === "light" ? "dark" : "light");
-          }}
-        >
-          {theme}
-        </button>
+        <div className="top-border brdr"></div>
+        <div className="left-border brdr"></div>
+        <div className="right-border brdr"></div>
+        <div className="bottom-border brdr"></div>
+        <div className="absolute-buttons">
+          <button
+            onClick={() => {
+              setLanguage(language === "english" ? "srpski" : "english");
+            }}
+          >
+            {language}
+          </button>
+          <button
+            className="theme"
+            onClick={() => {
+              setTheme(theme === "light" ? "dark" : "light");
+            }}
+          >
+            {theme}
+          </button>
+        </div>
+
         <div className="contact">
-          <p>Belgrade, Serbia</p>
-          <p>1.6.1990.</p>
+          <p>{language === "english" ? "Belgrade, Serbia" : "Beograd"}</p>
+          <p>{language === "english" ? "june 1st, 1990" : "1.6.1990."}</p>
           <p>joca4980@gmail.com</p>
           <p>+381 641559260</p>
         </div>
         <div className="info-div">
           <div className="left">
-            <h1>Jovan Stojković</h1>
-            <p className="desc">Frontend Developer /javascript; react JS/ </p>
+            <h1>
+              {language === "english" ? "Jovan Stojkovic" : "Jovan Stojković"}
+            </h1>
+            <p>Frontend Developer /javascript - react JS/ </p>
           </div>
           <div className="right">
             <a
@@ -37,7 +50,7 @@ const App = () => {
               target="_blank"
               className="CV"
             >
-              <p>Resume</p>
+              <p>{language === "english" ? "resume" : "cv"}</p>
             </a>
             <a
               href="https://github.com/jovan-stojkovic"
@@ -49,7 +62,7 @@ const App = () => {
           </div>
         </div>
         <div className="dropdowns">
-          <div className="website">
+          <div className="website dropdown">
             <button
               className={websiteHide}
               onClick={() => {
@@ -57,16 +70,17 @@ const App = () => {
                 setChallengeHide("hide");
               }}
             >
-              websites
+              {language === "english" ? "Websites" : "Sajtovi"}
               <img src="/icons/down.svg" alt="down" />
             </button>
-            <div className={`websites ${websiteHide}`}>
+            <div className={`websites article-cont ${websiteHide}`}>
               <article id="decorvision">
                 <div className="card-data">
                   <h2>Decor Vision</h2>
                   <p className="desc">
-                    My first paid project that I've made from start to finish.
-                    My only live website for now!
+                    {language === "english"
+                      ? "My first paid project that I've made from start to finish. My only live website for now!"
+                      : "Moj prvi honorarni projekat koji sam uradio od početka do kraja. Za sada jedini 'živi' sajt!"}
                   </p>
                   <div className="article-links">
                     <a
@@ -84,10 +98,11 @@ const App = () => {
               </article>
               <article id="game">
                 <div className="card-data">
-                  <h2>Sheldon's Game</h2>
+                  <h2>Rock, paper, scissors, lizard, Spock</h2>
                   <p className="desc">
-                    My own project of making the game from popular TV show 'The
-                    Big Bang Theory'
+                    {language === "english"
+                      ? "My own project of making the game from popular TV show 'The Big Bang Theory'"
+                      : "Lično moj projekat, gde sam napravio igru iz popularne TV serije 'Štreberi'"}
                   </p>
                   <div className="article-links">
                     <a
@@ -106,7 +121,7 @@ const App = () => {
             </div>
           </div>
 
-          <div className="challenge">
+          <div className="challenge dropdown">
             <button
               className={challengeHide}
               onClick={() => {
@@ -115,16 +130,20 @@ const App = () => {
               }}
             >
               <img src="/icons/down.svg" alt="down" />
-              challenges
+              {language === "english" ? "Challenges" : "Izazovi"}
             </button>
-            <div className={`challenges ${challengeHide}`}>
+            <div className={`challenges article-cont ${challengeHide}`}>
               <article id="multiform">
                 <div className="card-data">
-                  <h2>Multipage Form</h2>
+                  <h2>
+                    {language === "english"
+                      ? "Multipage Form"
+                      : "Forma na više strana"}
+                  </h2>
                   <p className="desc">
-                    By far the hardest challenge I've done. Multipage form with
-                    validation and price calculations based on monthly or yearly
-                    prices.
+                    {language === "english"
+                      ? "By far the hardest challenge I've done. Multipage form with validation and price calculations based on monthly or yearly prices."
+                      : "Ubedljivo najteži izazov koji sam radio. Forma na nekoliko strana sa validacijom i računanjem cene na osnovu mesečne ili godišnje pretplate."}
                   </p>
                   <div className="article-links">
                     <a
@@ -143,10 +162,11 @@ const App = () => {
 
               <article id="countries">
                 <div className="card-data">
-                  <h2>Countries</h2>
+                  <h2>{language === "english" ? "Countries" : "Države"}</h2>
                   <p className="desc">
-                    The hardest challenge I've done. Fetch data from an API,
-                    themes, filtes and much more...
+                    {language === "english"
+                      ? "Pretty hard challenge. Fetch data from an API, themes, filtes and much more..."
+                      : "Prilično zahtevan izazov. Potrebno je dohvatiti podatke sa API-ja, postoje teme, filteri i još dosta toga..."}
                   </p>
                   <div className="article-links">
                     <a
@@ -167,8 +187,9 @@ const App = () => {
                 <div className="card-data">
                   <h2>E-Commerce</h2>
                   <p className="desc">
-                    E-Commerce challenge with navbar, thumbnails, increasing
-                    cart items and price calculations.
+                    {language === "english"
+                      ? "E-Commerce challenge with navbar, thumbnails, increasing cart items and price calculations."
+                      : "Izazov sa navbar-om, slikama i korpom sa više proizvoda."}
                   </p>
                   <div className="article-links">
                     <a
@@ -187,9 +208,15 @@ const App = () => {
 
               <article id="spending">
                 <div className="card-data">
-                  <h2>Spending bar chart</h2>
+                  <h2>
+                    {language === "english"
+                      ? "Spending bar chart"
+                      : "Grafikon za potrošnju"}
+                  </h2>
                   <p className="desc">
-                    Spending challenge that visualy represents expenses by day.
+                    {language === "english"
+                      ? "Spending challenge that visualy represents expenses by day."
+                      : "Izazov koji prikazuje troškove po danima u vidu grafikona."}
                   </p>
                   <div className="article-links">
                     <a
@@ -208,10 +235,15 @@ const App = () => {
 
               <article id="pricing">
                 <div className="card-data">
-                  <h2>Pricing selector</h2>
+                  <h2>
+                    {language === "english"
+                      ? "Pricing selector"
+                      : "Selektor plaćanja"}
+                  </h2>
                   <p className="desc">
-                    Simple challenge to change pricing based on the checkbox
-                    (annualy or monthly)
+                    {language === "english"
+                      ? "Simple challenge to change pricing based on the checkbox (annualy or monthly)."
+                      : "Jednostavan izazov za menjanje cene na osnovu štikliranja (mesečno ili godišnje)."}
                   </p>
                   <div className="article-links">
                     <a
@@ -229,11 +261,15 @@ const App = () => {
               </article>
               <article id="tip">
                 <div className="card-data">
-                  <h2>Tip calculator</h2>
+                  <h2>
+                    {language === "english"
+                      ? "Tip calculator"
+                      : "Kalkulator za bakšiš"}
+                  </h2>
                   <p className="desc">
-                    Tip calculator that gives you options to enter bill value,
-                    select tip%, number of people and then calculates price and
-                    the tip total, and per person
+                    {language === "english"
+                      ? "Tip calculator that gives you options to enter bill value, select tip%, number of people and then calculates price and the tip total, and per person."
+                      : "Kalkulator bakšiša koji nudi opcije za unošenje računa, procenta bakšiša, broja ljudi i onda izračuna ukupan račun, bakšiš i podeli po osobama."}
                   </p>
                   <div className="article-links">
                     <a
@@ -254,8 +290,9 @@ const App = () => {
                 <div className="card-data">
                   <h2>Snap</h2>
                   <p className="desc">
-                    Regular website, where the challenge was dropdown menus in
-                    navbar.
+                    {language === "english"
+                      ? "Regular website, where the challenge was dropdown menus in navbar."
+                      : "Običan vebsajt, izazov su padajući meniji u navbaru."}
                   </p>
                   <div className="article-links">
                     <a
@@ -274,10 +311,15 @@ const App = () => {
 
               <article id="advice">
                 <div className="card-data">
-                  <h2>Advice Generator</h2>
+                  <h2>
+                    {language === "english"
+                      ? "Advice Generator"
+                      : "Generator za savete"}
+                  </h2>
                   <p className="desc">
-                    Challenge that fetches advices from an external API on
-                    button press and renders it
+                    {language === "english"
+                      ? "Challenge that fetches advices from an external API on button press and renders it."
+                      : "Izazov da se dohvate podaci sa API-ja na pritisak dugmeta i da se prikaže savet korisniku."}
                   </p>
                   <div className="article-links">
                     <a

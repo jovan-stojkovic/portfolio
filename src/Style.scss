@@ -15,6 +15,13 @@ $strong-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
   rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
   rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
+@mixin flex($align: center, $justify: center, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,10 +35,8 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: $phudu;
+  @include flex();
 
   .container {
     width: 95vw;
@@ -40,33 +45,27 @@ main {
     padding: 40px;
 
     .info-div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin-bottom: 20px;
       text-align: center;
+      @include flex($justify: space-between);
 
       .left {
-        padding: 10px;
-        border-radius: 5px;
         h1 {
           font-size: 80px;
-          font-weight: 200;
-          letter-spacing: 2px;
+          font-weight: 400;
+          letter-spacing: 3px;
           color: $almost-black;
         }
-        p.desc {
+        p {
           font-size: 20px;
           letter-spacing: 6px;
+          color: $almost-black;
         }
       }
 
       .right {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex($justify: space-between);
         gap: 50px;
-        margin-right: 53px;
 
         a {
           all: unset;
@@ -97,40 +96,40 @@ main {
           }
 
           p {
+            font-family: $plex;
             opacity: 0;
             position: absolute;
-            bottom: -30px;
+            bottom: -40px;
             left: -30px;
             width: 120px;
-            height: 20px;
+            letter-spacing: 2px;
+            height: 30px;
             font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.2);
+            @include flex();
+            background-color: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(1px);
+            color: $almost-black;
+            border-radius: 2px;
           }
         }
       }
     }
-    .dropdowns {
-      display: flex;
-      align-items: top;
-      justify-content: space-between;
 
-      .website {
+    .dropdowns {
+      @include flex($align: top, $justify: space-between);
+
+      .dropdown {
         position: relative;
+
         button {
           all: unset;
           padding: 10px;
           font-size: 40px;
           letter-spacing: 1px;
           transition: 0.5s;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          @include flex($justify: space-between);
           gap: 20px;
-          filter: blur(2px);
+          filter: blur(1px);
           color: $almost-black;
 
           img {
@@ -151,21 +150,19 @@ main {
             }
           }
         }
-
-        .websites {
+        .article-cont {
           position: absolute;
-          margin-top: 50px;
+          margin-top: 20px;
           height: 0;
-          width: 80vw;
+          width: 0;
           display: flex;
           justify-content: space-between;
           gap: 5px;
-          transition: height 0.2s ease-out;
+          transition: height 0.3s, width 0.3s;
 
           article {
-            width: 45%;
+            width: 48%;
             height: 100%;
-            background-color: white;
             position: relative;
             background-position: top;
             background-size: cover;
@@ -204,12 +201,10 @@ main {
             .card-data {
               position: absolute;
               padding: 20px;
-              background-color: rgba(255, 255, 255, 1);
+              background-color: rgba(255, 255, 255, 0.4);
+              backdrop-filter: blur(5px);
               border-radius: 10px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
+              @include flex($direction: column);
               width: 90%;
               box-shadow: $shadow;
               bottom: -9rem;
@@ -224,6 +219,7 @@ main {
                 font-weight: 200;
                 letter-spacing: 2px;
                 margin-bottom: 10px;
+                text-align: center;
               }
 
               p {
@@ -233,9 +229,7 @@ main {
               }
 
               .article-links {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                @include flex();
                 gap: 30px;
                 margin-top: 20px;
 
@@ -263,237 +257,149 @@ main {
 
           &.show {
             height: 600px;
-            transition: height 0.6s;
-          }
-        }
-      }
-
-      .challenge {
-        position: relative;
-        button {
-          all: unset;
-          padding: 10px;
-          font-size: 40px;
-          letter-spacing: 1px;
-          transition: 0.5s;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
-          color: $almost-black;
-          filter: blur(2px);
-
-          img {
-            height: 15px;
-            transition: 0.2s;
-          }
-
-          &:hover {
-            transition: 0.5s;
-            cursor: pointer;
-            filter: blur(0);
-          }
-
-          &.show {
-            img {
-              transform: rotate(180deg);
-              transition: 0.6s;
-            }
+            width: 80vw;
+            transition: height 0.6s, width 0.6s;
           }
         }
 
-        .challenges {
-          position: absolute;
-          right: 0;
-          margin-top: 50px;
-          height: 0;
-          width: 80vw;
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr 1fr;
-          justify-content: space-between;
-          gap: 10px;
-          transition: height 0.2s ease-out;
+        &.challenge {
+          button {
+            &.show {
+              img {
+                transform: rotate(180deg);
+              }
+            }
+          }
 
-          article {
-            width: 100%;
-            height: 88%;
-            background-color: white;
-            position: relative;
-            background-position: top;
-            background-size: cover;
-            overflow: hidden;
-            filter: grayscale(0.3) blur(0.5px);
-            box-shadow: $shadow;
-            border-radius: 5px;
+          .article-cont {
+            position: absolute;
+            right: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: space-between;
+            gap: 10px;
 
-            &:hover {
-              animation: remove-overflow 2s forwards;
-              filter: grayscale(0.8) blur(0);
-              transition: filter 0.5s;
+            article {
+              width: 100%;
+              height: 88%;
+
+              &#multiform {
+                background-image: url("/work/form.jpg");
+              }
+
+              &#countries {
+                background-image: url("/work/countries.jpg");
+              }
+
+              &#ecomerce {
+                background-image: url("/work/ecommerce.jpg");
+              }
+
+              &#spending {
+                background-image: url("/work/spending.jpg");
+              }
+
+              &#pricing {
+                background-image: url("/work/pricing.jpg");
+              }
+
+              &#tip {
+                background-image: url("/work/calculator.jpg");
+              }
+
+              &#snap {
+                background-image: url("/work/snap.jpg");
+              }
+
+              &#advice {
+                background-image: url("/work/advice.jpg");
+              }
+
+              &#rating {
+                background-image: url("/work/rating.jpg");
+              }
+
+              &#newsletter {
+                background-image: url("/work/newsletter.jpg");
+              }
+
               .card-data {
-                animation: show-data 1s forwards;
-                opacity: 1;
-                transition: opacity 0.3s;
-              }
-            }
+                h2 {
+                  font-size: 22px;
+                }
 
-            &:not(:hover) {
-              animation: show-overflow 2s forwards;
+                p {
+                  text-align: center;
+                  font-size: 12px;
+                  line-height: 20px;
+                }
 
-              .card-data {
-                animation: remove-data 1s forwards;
-              }
-            }
-
-            &#multiform {
-              background-image: url("/work/form.jpg");
-            }
-
-            &#countries {
-              background-image: url("/work/countries.jpg");
-            }
-
-            &#ecomerce {
-              background-image: url("/work/ecommerce.jpg");
-            }
-
-            &#spending {
-              background-image: url("/work/spending.jpg");
-            }
-
-            &#pricing {
-              background-image: url("/work/pricing.jpg");
-            }
-
-            &#tip {
-              background-image: url("/work/calculator.jpg");
-            }
-
-            &#snap {
-              background-image: url("/work/snap.jpg");
-            }
-
-            &#advice {
-              background-image: url("/work/advice.jpg");
-            }
-
-            &#rating {
-              background-image: url("/work/rating.jpg");
-            }
-
-            &#newsletter {
-              background-image: url("/work/newsletter.jpg");
-            }
-
-            .card-data {
-              position: absolute;
-              padding: 20px;
-              background-color: rgba(255, 255, 255, 1);
-              border-radius: 10px;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              width: 90%;
-              box-shadow: $shadow;
-              bottom: -9rem;
-              left: 0;
-              right: 0;
-              margin-inline: auto;
-              opacity: 0;
-              transition: opacity 1s 1s;
-
-              h2 {
-                font-size: 22px;
-                font-weight: 200;
-                letter-spacing: 2px;
-                margin-bottom: 10px;
-              }
-
-              p {
-                text-align: center;
-                font-size: 12px;
-                line-height: 20px;
-                font-family: "IBM Plex Mono", monospace;
-              }
-
-              .article-links {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-                margin-top: 20px;
-
-                .link {
-                  height: 20px;
-                  width: 20px;
-                  transition: 0.5s;
-
-                  &:hover {
-                    transform: rotate(360deg);
-                    transition: 0.5s;
-                  }
-
-                  &.article-website {
-                    background-image: url("/icons/link.svg");
-                  }
-
-                  &.article-github {
-                    background-image: url("/icons/github.svg");
+                .article-links {
+                  .link {
+                    height: 20px;
+                    width: 20px;
                   }
                 }
               }
             }
-          }
 
-          &.show {
-            height: 650px;
-            transition: height 0.6s;
+            &.show {
+              height: 650px;
+            }
           }
         }
       }
     }
+
     ///borders:
-    .top-border {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: $border;
-      width: 80%;
-      background-image: linear-gradient(to right, black, rgba(0, 0, 0, 0));
-    }
 
-    .left-border {
+    .brdr {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: $border;
-      height: 80%;
-      background-image: linear-gradient(black, rgba(0, 0, 0, 0));
-    }
+      border-radius: 5px;
 
-    .right-border {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: $border;
-      height: 50%;
-      transform: rotate(180deg);
-      background-image: linear-gradient($almost-white, rgba(0, 0, 0, 0));
-    }
+      &.top-border {
+        top: 0;
+        left: 0;
+        height: $border;
+        width: 70%;
+        background-image: linear-gradient(
+          to right,
+          yellow,
+          rgba(255, 255, 0, 0)
+        );
+      }
+      &.left-border {
+        top: 0;
+        left: 0;
+        width: $border;
+        height: 60%;
+        background-image: linear-gradient(
+          rgb(255, 255, 0),
+          rgba(255, 255, 0, 0)
+        );
+      }
 
-    .bottom-border {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: $border;
-      width: 50%;
-      transform: rotate(180deg);
-      background-image: linear-gradient(
-        to right,
-        $almost-white,
-        rgba(0, 0, 0, 0)
-      );
+      &.right-border {
+        bottom: 0;
+        right: 0;
+        width: $border;
+        height: 60%;
+        transform: rotate(180deg);
+        background-image: linear-gradient(yellow, rgba(255, 255, 0, 0));
+      }
+
+      &.bottom-border {
+        bottom: 0;
+        right: 0;
+        height: $border;
+        width: 70%;
+        transform: rotate(180deg);
+        background-image: linear-gradient(
+          to right,
+          yellow,
+          rgba(255, 255, 0, 0)
+        );
+      }
     }
 
     ///contacts:
@@ -508,88 +414,100 @@ main {
       bottom: 25px;
       padding: 10px;
       transition: 0.1s;
-      filter: blur(1px);
+      backdrop-filter: blur(2px);
 
       &:hover {
         font-size: 20px;
-        padding: 40px;
-        line-height: 30px;
+        padding: 60px;
+        line-height: 40px;
         transition: 0.3s;
         border-radius: 100px 100px 0 100px;
-        filter: blur(0);
+        letter-spacing: 3px;
       }
     }
 
     ///theme:
-    .theme {
-      all: unset;
+    ///
+    .absolute-buttons {
       position: absolute;
       left: 0;
       bottom: 30px;
-      transform: rotate(270deg);
-      letter-spacing: 3px;
-      font-size: 20px;
-      transition: 0.2s;
-      color: $almost-white;
+      width: 100px;
+      @include flex($direction: column);
 
-      &:hover {
-        scale: 1.1;
-        transform: rotate(0);
+      button {
+        all: unset;
+        transform: rotate(270deg);
+        letter-spacing: 3px;
+        font-size: 20px;
+        font-family: $plex;
         transition: 0.2s;
-        cursor: pointer;
+        color: $almost-white;
+        height: 120px;
+
+        &:hover {
+          scale: 1.1;
+          transform: rotate(0);
+          transition: 0.2s;
+          cursor: pointer;
+        }
       }
     }
   }
 }
 
 main.dark {
-  background-image: url("/assets/background-dark.jpg");
+  background-image: url("/assets/black-white-dark.jpg");
 
   .container {
     .info-div {
       .left {
-        background-color: rgba(0, 0, 0, 0.4);
         h1 {
-          color: $almost-white;
+          color: black;
         }
-        p.desc {
-          color: $almost-white;
+        p {
+          color: black;
         }
       }
 
       .right {
         a {
-          filter: blur(1px) invert(0.8);
+          filter: blur(2px) brightness(0);
 
           &:hover {
-            filter: blur(0) invert(0.8);
+            filter: blur(0) brightness(0);
 
             p {
               opacity: 1;
             }
           }
+
+          p {
+            background-color: rgb(0, 0, 0, 0.1);
+            color: black;
+            font-weight: 600;
+          }
         }
       }
     }
+
     .dropdowns {
-      .website {
+      .dropdown {
         button {
-          color: $almost-white;
+          color: black;
+
           img {
-            filter: invert(0.8);
-          }
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.4);
+            filter: brightness(0);
           }
         }
 
-        .websites {
+        .article-cont {
           article {
-            filter: grayscale(0.9) blur(0.5px) brightness(0.7);
+            filter: grayscale(0.3) blur(0.5px) brightness(0.5);
 
             &:hover {
               animation: remove-overflow 2s forwards;
-              filter: grayscale(0) blur(0) brightness(0.7);
+              filter: grayscale(0.8) blur(0) brightness(0.8);
               transition: filter 0.5s;
               .card-data {
                 animation: show-data 1s forwards;
@@ -607,74 +525,19 @@ main.dark {
             }
 
             .card-data {
-              background-color: rgb(47, 47, 56, 0.96);
+              background-color: rgba(0, 0, 0, 0.8);
 
               h2 {
-                color: $almost-white;
+                color: rgb(229, 229, 229);
               }
 
               p {
-                color: $almost-white;
+                color: rgb(229, 229, 229);
               }
 
               .article-links {
                 .link {
-                  filter: invert(0.8);
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .challenge {
-        button {
-          color: $almost-white;
-          img {
-            filter: invert(0.8);
-          }
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.4);
-          }
-        }
-
-        .challenges {
-          article {
-            filter: grayscale(0.9) blur(0.5px) brightness(0.7);
-
-            &:hover {
-              animation: remove-overflow 2s forwards;
-              filter: grayscale(0) blur(0) brightness(0.7);
-              transition: filter 0.5s;
-              .card-data {
-                animation: show-data 1s forwards;
-                opacity: 1;
-                transition: opacity 0.3s;
-              }
-            }
-
-            &:not(:hover) {
-              animation: show-overflow 2s forwards;
-
-              .card-data {
-                animation: remove-data 1s forwards;
-              }
-            }
-
-            .card-data {
-              background-color: rgb(47, 47, 56, 0.96);
-
-              h2 {
-                color: $almost-white;
-              }
-
-              p {
-                color: $almost-white;
-              }
-
-              .article-links {
-                .link {
-                  filter: invert(0.8);
+                  filter: brightness(3);
                 }
               }
             }
@@ -682,65 +545,65 @@ main.dark {
         }
       }
     }
+
     ///borders:
-    .top-border {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: $border;
-      width: 80%;
-      background-image: linear-gradient(
-        to right,
-        $almost-white,
-        rgba(0, 0, 0, 0)
-      );
-    }
 
-    .left-border {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: $border;
-      height: 80%;
-      background-image: linear-gradient($almost-white, rgba(0, 0, 0, 0));
-    }
+    .brdr {
+      &.top-border {
+        background-image: linear-gradient(
+          to right,
+          black,
+          rgba(255, 255, 0, 0)
+        );
+      }
+      &.left-border {
+        background-image: linear-gradient(black, rgba(255, 255, 0, 0));
+      }
 
-    .right-border {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: $border;
-      height: 50%;
-      transform: rotate(180deg);
-      background-image: linear-gradient($almost-white, rgba(0, 0, 0, 0));
-    }
+      &.right-border {
+        background-image: linear-gradient(black, rgba(255, 255, 0, 0));
+      }
 
-    .bottom-border {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: $border;
-      width: 50%;
-      transform: rotate(180deg);
-      background-image: linear-gradient(
-        to right,
-        $almost-white,
-        rgba(0, 0, 0, 0)
-      );
+      &.bottom-border {
+        background-image: linear-gradient(
+          to right,
+          black,
+          rgba(255, 255, 0, 0)
+        );
+      }
     }
 
     ///contacts:
     .contact {
-      background-color: rgba(0, 0, 0, 0.4);
-      color: $almost-white;
+      background-color: rgba(255, 255, 255, 0.3);
+      color: black;
     }
 
     ///theme:
-    .theme {
-      color: $almost-white;
+    .absolute-buttons {
+
+      button {
+        all: unset;
+        transform: rotate(270deg);
+        letter-spacing: 3px;
+        font-size: 20px;
+        font-family: $plex;
+        transition: 0.2s;
+        color: rgb(229, 229, 229);
+      
+        height: 120px;
+
+        &:hover {
+          scale: 1.1;
+          transform: rotate(0);
+          transition: 0.2s;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
+
 /* Card animation */
 @keyframes show-data {
   50% {
