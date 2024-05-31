@@ -24,7 +24,7 @@ const App = () => {
           <p>Belgrade, Serbia</p>
           <p>1.6.1990.</p>
           <p>joca4980@gmail.com</p>
-          <p>+391 641559260</p>
+          <p>+381 641559260</p>
         </div>
         <div className="info-div">
           <div className="left">
