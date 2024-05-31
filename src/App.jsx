@@ -1,5 +1,7 @@
+import { useState } from "react";
 import "./Style.scss";
 const App = () => {
+  const [websiteHide, setWebsiteHide] = useState("hide");
   return (
     <main>
       <div className="container">
@@ -30,13 +32,60 @@ const App = () => {
             </a>
           </div>
         </div>
+
         <div className="website">
-          <button>websites</button>
-          <div className="websites hide">
-            <article id="decorvision"></article>
-          </div>
-          <div className="hidden-websites">
-            <div className="decorvision"></div>
+          <button
+            className={websiteHide}
+            onClick={() => {
+              setWebsiteHide(websiteHide === "hide" ? "show" : "hide");
+            }}
+          >
+            websites
+            <img src="/icons/down.svg" alt="down" />
+          </button>
+          <div className={`websites ${websiteHide}`}>
+            <article id="decorvision">
+              <div className="card-data">
+                <h2>Decor Vision</h2>
+                <p className="desc">
+                  My first paid project that I've made from start to finish. My
+                  only live website for now!
+                </p>
+                <div className="article-links">
+                  <a
+                    target="_blank"
+                    href="https://decorvision.rs/"
+                    className="link article-website"
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://github.com/jovan-stojkovic/decor-vision"
+                    className="link article-github"
+                  ></a>
+                </div>
+              </div>
+            </article>
+            <article id="game">
+              <div className="card-data">
+                <h2>Sheldon's Game</h2>
+                <p className="desc">
+                  My own project of making the game from popular TV show 'The
+                  Big Bang Theory'
+                </p>
+                <div className="article-links">
+                  <a
+                    target="_blank"
+                    href="https://sheldons-game-desktop.netlify.app/"
+                    className="link article-website"
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://github.com/jovan-stojkovic/The-Sheldon-Game"
+                    className="link article-github"
+                  ></a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
 

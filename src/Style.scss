@@ -5,6 +5,8 @@ $blue: rgb(3, 166, 188);
 $phudu: "Phudu", sans-serif;
 $prism: "Tilt Prism", sans-serif;
 $border: 4px;
+$gray: rgba(255, 255, 255, 0.3);
+$shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 * {
   box-sizing: border-box;
@@ -34,14 +36,15 @@ main {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 20px;
 
       .left {
         padding: 20px;
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: $gray;
         backdrop-filter: blur(1px);
         h1 {
           font-family: $prism;
-          font-size: 50px;
+          font-size: 70px;
           font-weight: 200;
         }
         p.desc {
@@ -73,7 +76,7 @@ main {
             filter: blur(0);
 
             p {
-                opacity: 1;
+              opacity: 1;
             }
           }
 
@@ -82,7 +85,6 @@ main {
           }
           &.github {
             background-image: url("/icons/github.svg");
-
           }
 
           p {
@@ -98,6 +100,151 @@ main {
             background-color: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(1px);
           }
+        }
+      }
+    }
+
+    .website {
+      button {
+        all: unset;
+        padding: 10px;
+        font-size: 30px;
+        letter-spacing: 1px;
+        width: 200px;
+        transition: 0.5s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+          height: 15px;
+          transition: 0.2s;
+        }
+
+        &:hover {
+          background-color: $gray;
+          backdrop-filter: blur(1px);
+          transition: 0.5s;
+          cursor: pointer;
+        }
+
+        &.show {
+          img {
+            transform: rotate(-180deg);
+            transition: 0.6s;
+          }
+        }
+      }
+
+      .websites {
+        margin: 20px 0;
+        height: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        transition: height 0.2s ease-out;
+
+        article {
+          width: 45%;
+          height: 100%;
+          background-color: white;
+          position: relative;
+          background-position: top;
+          background-size: cover;
+          overflow: hidden;
+          filter: grayscale(0.9) blur(0.5px);
+          box-shadow: $shadow;
+
+          &:hover {
+            animation: remove-overflow 2s forwards;
+            filter: grayscale(0) blur(0);
+            transition: filter 0.5s;
+            .card-data {
+              animation: show-data 1s forwards;
+              opacity: 1;
+              transition: opacity 0.3s;
+            }
+          }
+
+          &:not(:hover) {
+            animation: show-overflow 2s forwards;
+
+            .card-data {
+              animation: remove-data 1s forwards;
+            }
+          }
+
+          &#decorvision {
+            background-image: url("/work/decorvision.jpg");
+          }
+
+          &#game {
+            background-image: url("/work/game.jpg");
+          }
+
+          .card-data {
+            position: absolute;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            box-shadow: $shadow;
+            bottom: -9rem;
+            left: 0;
+            right: 0;
+            margin-inline: auto;
+            opacity: 0;
+            transition: opacity 1s 1s;
+
+            h2 {
+              font-size: 40px;
+              font-weight: 200;
+              letter-spacing: 2px;
+              margin-bottom: 10px;
+            }
+
+            p {
+              text-align: center;
+              line-height: 26px;
+            }
+
+            .article-links {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 30px;
+              margin-top: 20px;
+
+              .link {
+                height: 30px;
+                width: 30px;
+                transition: 0.5s;
+
+                &:hover {
+                  transform: rotate(360deg);
+                  transition: 0.5s;
+                }
+
+                &.article-website {
+                  background-image: url("/icons/link.svg");
+                }
+
+                &.article-github {
+                  background-image: url("/icons/github.svg");
+                }
+              }
+            }
+          }
+        }
+
+        &.show {
+          height: 300px;
+          transition: height 0.6s;
         }
       }
     }
@@ -164,5 +311,42 @@ main {
         transition: 0.3s;
       }
     }
+  }
+}
+/* Card animation */
+@keyframes show-data {
+  50% {
+    transform: translateY(-10rem);
+  }
+  100% {
+    transform: translateY(-7rem);
+  }
+}
+
+@keyframes remove-overflow {
+  to {
+    overflow: initial;
+  }
+}
+
+@keyframes remove-data {
+  0% {
+    transform: translateY(-7rem);
+  }
+  50% {
+    transform: translateY(-10rem);
+  }
+  100% {
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes show-overflow {
+  0% {
+    overflow: initial;
+    pointer-events: none;
+  }
+  50% {
+    overflow: hidden;
   }
 }
