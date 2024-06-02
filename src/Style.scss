@@ -39,7 +39,7 @@ main {
   @include flex();
 
   .container {
-    width: 95vw;
+    width: 97vw;
     height: 95vh;
     position: relative;
     padding: 40px;
@@ -87,8 +87,8 @@ main {
               opacity: 1;
             }
           }
-          &.linkedin{
-            background-image: url('/icons/linkedin.svg');
+          &.linkedin {
+            background-image: url("/icons/linkedin.svg");
           }
           &.CV {
             background-image: url("/icons/file.svg");
@@ -443,11 +443,19 @@ main {
         all: unset;
         transform: rotate(270deg);
         letter-spacing: 3px;
-        font-size: 20px;
+        font-size: 18px;
         font-family: $plex;
         transition: 0.2s;
         color: $almost-white;
         height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        img {
+          height: 18px;
+        }
 
         &:hover {
           scale: 1.1;
@@ -589,18 +597,167 @@ main.dark {
         all: unset;
         transform: rotate(270deg);
         letter-spacing: 3px;
-        font-size: 20px;
+        font-size: 18px;
         font-family: $plex;
         transition: 0.2s;
-        color: rgb(229, 229, 229);
-
+        color: white;
         height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        img {
+          height: 18px;
+        }
 
         &:hover {
           scale: 1.1;
           transform: rotate(0);
           transition: 0.2s;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  main {
+    .container {
+      .info-div {
+        margin-bottom: 10px;
+
+        .left {
+          h1 {
+            font-size: 60px;
+          }
+          p {
+            font-size: 18px;
+            letter-spacing: 3px;
+          }
+        }
+
+        .right {
+          gap: 30px;
+
+          a {
+            width: 40px;
+            height: 40px;
+
+            p {
+              width: 100px;
+              height: 25px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      .dropdowns {
+        .dropdown {
+          button {
+            font-size: 30px;
+          }
+
+          .article-cont {
+            margin-top: 5px;
+
+            article {
+              width: 48%;
+              height: 80%;
+
+              .card-data {
+                h2 {
+                  font-size: 28px;
+                }
+
+                p {
+                  font-size: 14px;
+                }
+              }
+            }
+
+            &.show {
+              height: 60vh;
+              width: 90vw;
+            }
+          }
+
+          &.challenge {
+            .article-cont {
+              article {
+                width: 100%;
+                height: 88%;
+
+                .card-data {
+                  padding: 10px;
+                  h2 {
+                    font-size: 18px;
+                  }
+
+                  p {
+                    font-size: 10px;
+                  }
+                }
+              }
+
+              &.show {
+                height: 60vh;
+              }
+            }
+          }
+        }
+      }
+
+      ///borders:
+
+      .brdr {
+        position: absolute;
+        border-radius: 5px;
+
+        &.top-border {
+          top: 0;
+          left: 0;
+          height: $border;
+          width: 70%;
+          background-image: linear-gradient(
+            to right,
+            yellow,
+            rgba(255, 255, 0, 0)
+          );
+        }
+        &.left-border {
+          top: 0;
+          left: 0;
+          width: $border;
+          height: 60%;
+          background-image: linear-gradient(
+            rgb(255, 255, 0),
+            rgba(255, 255, 0, 0)
+          );
+        }
+
+        &.right-border {
+          bottom: 0;
+          right: 0;
+          width: $border;
+          height: 60%;
+          transform: rotate(180deg);
+          background-image: linear-gradient(yellow, rgba(255, 255, 0, 0));
+        }
+
+        &.bottom-border {
+          bottom: 0;
+          right: 0;
+          height: $border;
+          width: 70%;
+          transform: rotate(180deg);
+          background-image: linear-gradient(
+            to right,
+            yellow,
+            rgba(255, 255, 0, 0)
+          );
         }
       }
     }

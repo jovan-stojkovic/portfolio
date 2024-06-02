@@ -2,11 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import "./Style.scss";
 import VanillaTilt from "vanilla-tilt";
 
+let srb = "/assets/srb.png";
+let eng = "/assets/eng.png";
+
+let bulbOn = "/assets/light-bulb.svg";
+let bulbOff = "/assets/light-bulb-off.svg";
+
 const App = () => {
   const [websiteHide, setWebsiteHide] = useState("hide");
   const [challengeHide, setChallengeHide] = useState("hide");
   const [theme, setTheme] = useState("light");
   const [language, setLanguage] = useState("english");
+  const [flag, setFlag] = useState(eng);
+  const [bulb, setBulb] = useState(bulbOn);
 
   VanillaTilt.init(document.querySelectorAll(".article-website"), {
     max: 3,
@@ -33,19 +41,24 @@ const App = () => {
         <div className="bottom-border brdr"></div>
         <div className="absolute-buttons">
           <button
+            className="language"
             onClick={() => {
               setLanguage(language === "english" ? "srpski" : "english");
+              setFlag(flag === eng ? srb : eng);
             }}
           >
             {language}
+            <img src={flag} alt={language} />
           </button>
           <button
             className="theme"
             onClick={() => {
               setTheme(theme === "light" ? "dark" : "light");
+              setBulb(bulb === bulbOn ? bulbOff : bulbOn);
             }}
           >
             {theme}
+            <img src={bulb} alt={theme} />
           </button>
         </div>
 
@@ -68,7 +81,7 @@ const App = () => {
               target="_blank"
               className="linkedin"
             >
-              <p>Linkedin</p>
+              <p>linkedin</p>
             </a>
             <a
               href="https://drive.google.com/file/d/1nelDd0igCuTE5NbJzIBaGnioYf4p1iDv/view"
