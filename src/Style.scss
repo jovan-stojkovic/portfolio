@@ -87,7 +87,9 @@ main {
               opacity: 1;
             }
           }
-
+          &.linkedin{
+            background-image: url('/icons/linkedin.svg');
+          }
           &.CV {
             background-image: url("/icons/file.svg");
           }
@@ -170,10 +172,12 @@ main {
             filter: grayscale(0.3) blur(0.5px);
             box-shadow: $strong-shadow;
             border-radius: 5px;
+            z-index: 100;
 
             &:hover {
               animation: remove-overflow 2s forwards;
-              filter: grayscale(0.8) blur(0);
+              filter: grayscale(0) blur(0);
+              z-index: 101;
               transition: filter 0.5s;
               .card-data {
                 animation: show-data 1s forwards;
@@ -243,11 +247,11 @@ main {
                     transition: 0.5s;
                   }
 
-                  &.article-website {
+                  &.link-website {
                     background-image: url("/icons/link.svg");
                   }
 
-                  &.article-github {
+                  &.link-github {
                     background-image: url("/icons/github.svg");
                   }
                 }
@@ -581,7 +585,6 @@ main.dark {
 
     ///theme:
     .absolute-buttons {
-
       button {
         all: unset;
         transform: rotate(270deg);
@@ -590,7 +593,7 @@ main.dark {
         font-family: $plex;
         transition: 0.2s;
         color: rgb(229, 229, 229);
-      
+
         height: 120px;
 
         &:hover {

@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Style.scss";
+import VanillaTilt from "vanilla-tilt";
+
 const App = () => {
   const [websiteHide, setWebsiteHide] = useState("hide");
   const [challengeHide, setChallengeHide] = useState("hide");
   const [theme, setTheme] = useState("light");
   const [language, setLanguage] = useState("english");
+
+  VanillaTilt.init(document.querySelectorAll(".article-website"), {
+    max: 3,
+    speed: 200,
+    scale: 1.1,
+    glare: true,
+    easing: "cubic-bezier(.03,.98,.52,.99)",
+  });
+
+  VanillaTilt.init(document.querySelectorAll(".article-challenge"), {
+    max: 5,
+    speed: 800,
+    scale: 1.3,
+    glare: true,
+    easing: "cubic-bezier(.03,.98,.52,.99)",
+  });
 
   return (
     <main className={theme}>
@@ -38,13 +56,20 @@ const App = () => {
           <p>+381 641559260</p>
         </div>
         <div className="info-div">
-          <div className="left">
+          <div className="left" data-tilt>
             <h1>
               {language === "english" ? "Jovan Stojkovic" : "Jovan Stojković"}
             </h1>
             <p>Frontend Developer /javascript - react JS/ </p>
           </div>
           <div className="right">
+            <a
+              href="https://www.linkedin.com/in/jovan-stojkovi%C4%87-0a28bb296/"
+              target="_blank"
+              className="linkedin"
+            >
+              <p>Linkedin</p>
+            </a>
             <a
               href="https://drive.google.com/file/d/1nelDd0igCuTE5NbJzIBaGnioYf4p1iDv/view"
               target="_blank"
@@ -74,7 +99,7 @@ const App = () => {
               <img src="/icons/down.svg" alt="down" />
             </button>
             <div className={`websites article-cont ${websiteHide}`}>
-              <article id="decorvision">
+              <article id="decorvision" className="article-website">
                 <div className="card-data">
                   <h2>Decor Vision</h2>
                   <p className="desc">
@@ -86,17 +111,17 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://decorvision.rs/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/decor-vision"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
-              <article id="game">
+              <article id="game" className="article-website">
                 <div className="card-data">
                   <h2>Rock, paper, scissors, lizard, Spock</h2>
                   <p className="desc">
@@ -108,12 +133,12 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://sheldons-game-desktop.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/The-Sheldon-Game"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
@@ -133,7 +158,7 @@ const App = () => {
               {language === "english" ? "Challenges" : "Izazovi"}
             </button>
             <div className={`challenges article-cont ${challengeHide}`}>
-              <article id="multiform">
+              <article id="multiform" className="article-challenge">
                 <div className="card-data">
                   <h2>
                     {language === "english"
@@ -149,18 +174,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://multiform-challenge3.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/multi-step-form-main"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="countries">
+              <article id="countries" className="article-challenge">
                 <div className="card-data">
                   <h2>{language === "english" ? "Countries" : "Države"}</h2>
                   <p className="desc">
@@ -172,18 +197,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://countries-react-challenge003.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/Countries-with-React--Alone"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="ecomerce">
+              <article id="ecomerce" className="article-challenge">
                 <div className="card-data">
                   <h2>E-Commerce</h2>
                   <p className="desc">
@@ -195,18 +220,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://ecommerce-challenge-3.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/Ecommerce-with-React"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="spending">
+              <article id="spending" className="article-challenge">
                 <div className="card-data">
                   <h2>
                     {language === "english"
@@ -222,18 +247,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://expences-challenge3.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/expenses-chart-challenge"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="pricing">
+              <article id="pricing" className="article-challenge">
                 <div className="card-data">
                   <h2>
                     {language === "english"
@@ -249,17 +274,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://pricing-component-challenge3.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/pricing-component-challenge"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
-              <article id="tip">
+
+              <article id="tip" className="article-challenge">
                 <div className="card-data">
                   <h2>
                     {language === "english"
@@ -275,18 +301,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://tip-calculator-challenge3.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/tip-calculator-app-main"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="snap">
+              <article id="snap" className="article-challenge">
                 <div className="card-data">
                   <h2>Snap</h2>
                   <p className="desc">
@@ -298,18 +324,18 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://intro-sectioin-with-dropdown-ch.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://github.com/jovan-stojkovic/intro-section-with-dropdown-navigation-main"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
               </article>
 
-              <article id="advice">
+              <article id="advice" className="article-challenge">
                 <div className="card-data">
                   <h2>
                     {language === "english"
@@ -325,12 +351,12 @@ const App = () => {
                     <a
                       target="_blank"
                       href="https://advice-generator-4980.netlify.app/"
-                      className="link article-website"
+                      className="link link-website"
                     ></a>
                     <a
                       target="_blank"
                       href="https://advice-generator-4980.netlify.app/"
-                      className="link article-github"
+                      className="link link-github"
                     ></a>
                   </div>
                 </div>
